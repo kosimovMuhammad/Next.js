@@ -1,65 +1,57 @@
-import Image from "next/image";
+// ---------------------------------------------------------------------------
+// CONCEPT MAP — which file demonstrates which Next.js data-fetching pattern.
+// See README.md for the full write-up.
+//
+//   app/page.tsx                 Server Component fetching data on the server
+//                                 (calls the real ToDo REST API server-side
+//                                 via lib/api.ts, no client round-trip)
+//   lib/api.ts                   All fetch() calls to https://to-dos-api.softclub.tj,
+//                                 server-only (the API's CORS policy blocks
+//                                 direct browser access anyway)
+//   app/api/todos/route.ts       Route Handler (GET/POST) — also a same-origin
+//                                 PROXY in front of the external API
+//   lib/actions.ts               Server Actions for mutations (add / edit /
+//                                 toggle / delete / image upload+delete),
+//                                 each calling revalidatePath("/")
+//   components/TodoList.tsx      Empty-state handling
+// ---------------------------------------------------------------------------
 
-export default function Home() {
+import { ListChecks } from "lucide-react";
+import { getTodos } from "@/lib/api";
+import AddTodoForm from "@/components/AddTodoForm";
+import TodoList from "@/components/TodoList";
+
+// SERVER COMPONENT FETCHING DATA ON THE SERVER
+// `Home` is an async Server Component. It calls into lib/api.ts directly —
+// no `fetch("/api/...")` from the browser, no client round-trip. The HTML
+// sent to the browser already contains the todo list, fetched server-to-
+// server from https://to-dos-api.softclub.tj.
+export default async function Home() {
+  const todos = await getTodos();
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <div className="mx-auto w-full max-w-2xl px-4 py-10 sm:py-16">
+      <header className="mb-8 flex items-center gap-3">
+        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-indigo-600 text-white shadow-sm shadow-indigo-600/30 dark:bg-indigo-500">
+          <ListChecks className="h-5 w-5" strokeWidth={2.25} />
+        </div>
+        <div>
+          <h1 className="text-xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-50">
+            Todos
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="text-sm text-zinc-500 dark:text-zinc-400">
+            A Next.js App Router reference for data fetching &amp; caching
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+      </header>
+
+      <main className="overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-sm shadow-zinc-950/5 dark:border-zinc-800 dark:bg-zinc-900">
+        <section className="flex flex-col gap-4 p-5 sm:p-6">
+          <AddTodoForm />
+          <TodoList todos={todos} />
+        </section>
       </main>
     </div>
   );
 }
+
