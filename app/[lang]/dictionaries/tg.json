@@ -1,0 +1,42 @@
+{
+  "meta": {
+    "title": "Todo — намунаи гирифтани маълумот дар Next.js",
+    "description": "Барномаи Todo, ки Компонентҳои Серверӣ, Route Handlers, Server Actions, кэшкунӣ ва стримингро дар Next.js App Router нишон медиҳад."
+  },
+  "header": {
+    "title": "Корҳо",
+    "subtitle": "Намунаи Next.js App Router барои гирифтани маълумот ва кэшкунӣ"
+  },
+  "addItem": {
+    "trigger": "ИЛОВА КУНЕД",
+    "modalTitle": "Кор илова кунед",
+    "namePlaceholder": "Ном",
+    "descriptionPlaceholder": "Тавсиф",
+    "cancel": "Бекор кардан",
+    "submit": "Илова",
+    "submitting": "Илова шуда истодааст..."
+  },
+  "empty": {
+    "message": "Ҳанӯз корҳо нест — аввалинро дар боло илова кунед."
+  },
+  "item": {
+    "edit": "Таҳрир",
+    "delete": "Нест кардан",
+    "markComplete": "Ҳамчун иҷрошуда қайд кунед",
+    "markActive": "Ҳамчун фаъол қайд кунед",
+    "editModalTitle": "Таҳрири кор",
+    "imagesLabel": "Расмҳо",
+    "cancel": "Бекор кардан",
+    "save": "Захира кардан",
+    "saving": "Захира шуда истодааст...",
+    "deleteModalTitle": "Нест кардани кор",
+    "deleteConfirm": "Оё шумо мутмаин ҳастед, ки мехоҳед ин корро нест кунед? Ин амалро бекор кардан мумкин нест.",
+    "deleteSubmit": "Нест кардан",
+    "deleting": "Нест шуда истодааст..."
+  },
+  "error": {
+    "title": "Хатогӣ рӯй дод",
+    "generic": "Ҳангоми боркунии корҳо хатогии ногаҳонӣ рух дод.",
+    "retry": "Аз нав кӯшиш кунед"
+  }
+}
