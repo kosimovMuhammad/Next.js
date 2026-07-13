@@ -1,0 +1,220 @@
+{
+  "Metadata": {
+    "title": "Майдончаи усулҳои файлии Next.js 16",
+    "description": "Майдончаи интерактивии усулҳои файлии Next.js 16 App Router бо забонҳои англисӣ, русӣ ва тоҷикӣ."
+  },
+  "HomePage": {
+    "title": "Майдончаи усулҳои файлии Next.js 16",
+    "description": "Ба ҳар як мисол дароед, то бубинед, ки он воқеан кор мекунад. Терминал ва консоли браузерро низ тафтиш кунед — баъзе намунаҳо дар онҷо сабт мекунанд.",
+    "lastUpdated": "Санаи навсозӣ: {date}",
+    "demoCount": "{count, plural, =0 {Ҳанӯз намуна нест} one {# намуна} other {# намуна}} дастрас аст"
+  },
+  "Navigation": {
+    "home": "Асосӣ",
+    "demos": "Намунаҳо",
+    "backToAllDemos": "← Ба ҳамаи намунаҳо"
+  },
+  "Common": {
+    "loading": "Боргирӣ шуда истодааст…",
+    "error": "Хатогӣ рӯй дод",
+    "backHome": "← Ба саҳифаи асосӣ",
+    "back": "← Бозгашт",
+    "reload": "Аз нав бор кардан",
+    "clicks": "Пахшҳо: {count}",
+    "mountedAt": "Дар {time} насб шуд"
+  },
+  "LocaleSwitcher": {
+    "label": "Забон",
+    "locale": {
+      "tj": "Тоҷикӣ",
+      "en": "English",
+      "ru": "Русский"
+    }
+  },
+  "DemosIndex": {
+    "groups": {
+      "rendering": "Файлҳои махсуси рендер",
+      "routing": "Усулҳои роҳнамоӣ (routing)",
+      "serverSide": "Файлҳои тарафи сервер",
+      "authInterrupts": "Вафаи аутентификатсия (озмоишӣ)"
+    },
+    "items": {
+      "layout": {
+        "title": "layout.js",
+        "blurb": "Ҳангоми гузариш боқӣ мемонад — ҳолат ҳеҷ гоҳ аз нав насозад."
+      },
+      "template": {
+        "title": "template.js",
+        "blurb": "Дар ҳар гузариш ҳолати компонентро аз нав месозад, бар хилофи layout.js."
+      },
+      "loading": {
+        "title": "loading.js",
+        "blurb": "Ивазкунандаи фаврии Suspense, то саҳифаи суст бор шавад."
+      },
+      "error": {
+        "title": "error.js",
+        "blurb": "Марзи хатогӣ бо хосияти нави unstable_retry (v16.2)."
+      },
+      "notFound": {
+        "title": "not-found.js",
+        "blurb": "Интерфейси фармоишӣ, ки ҳангоми даъвати notFound() нишон дода мешавад."
+      },
+      "dynamic": {
+        "title": "Сегментҳои Динамикӣ",
+        "blurb": "Папкаҳои [slug] параметрҳои URL-ро мехонанд."
+      },
+      "routeGroups": {
+        "title": "Гурӯҳҳои Роҳ",
+        "blurb": "Сегментҳои (папка) роҳҳоро ба тартиб медароранд, бе таъсир ба URL."
+      },
+      "parallel": {
+        "title": "Роҳҳои Мувозӣ + default.js",
+        "blurb": "Слотҳои @team ва @analytics паҳлӯи ҳам нишон дода мешаванд."
+      },
+      "feed": {
+        "title": "Роҳҳои Вафакунанда",
+        "blurb": "Кушодани акс ҳамчун равзанаи модалӣ бо пинҳон кардани URL тавассути (.)photo."
+      },
+      "routeHandler": {
+        "title": "route.js",
+        "blurb": "Нуқтаи интиҳоии GET/POST, ки аз браузер даъват мешавад."
+      },
+      "proxy": {
+        "title": "proxy.js",
+        "blurb": "Пештар \"middleware\" ном дошт — дар Next.js 16 номаш иваз шуд."
+      },
+      "instrumentation": {
+        "title": "instrumentation.js / instrumentation-client.js",
+        "blurb": "Сабти сервер ва браузер ҳангоми оғоз ва гузариш."
+      },
+      "segmentConfig": {
+        "title": "Танзими Сегменти Роҳ",
+        "blurb": "export const revalidate вақти боркунии такрориро идора мекунад."
+      },
+      "auth": {
+        "title": "forbidden.js / unauthorized.js",
+        "blurb": "forbidden() ва unauthorized() интерфейси 403 / 401-ро нишон медиҳанд."
+      }
+    }
+  },
+  "Forbidden": {
+    "title": "403 — Манъ аст",
+    "description": "Функсияи forbidden() даъват шуд. Ин app/[locale]/forbidden.tsx аст.",
+    "backLink": "← Бозгашт ба намуна"
+  },
+  "Unauthorized": {
+    "title": "401 — Иҷозат дода нашудааст",
+    "description": "Функсияи unauthorized() даъват шуд. Ин app/[locale]/unauthorized.tsx аст.",
+    "backLink": "← Бозгашт ба намуна"
+  },
+  "RootNotFound": {
+    "title": "404 — Ёфт нашуд",
+    "description": "Ин app/[locale]/not-found.tsx аст. Он ҳар як URL-и бо префикси забон, ки ба ягон роҳ дар ин барнома мувофиқат намекунад, дастгир мекунад — як URL-и бемаъно кӯшиш кунед, масалан /tj/this-does-not-exist."
+  },
+  "AuthDemo": {
+    "title": "forbidden() / unauthorized()",
+    "description": "Функсияҳои озмоишии вафаи аутентификатсия, ки тавассути experimental.authInterrupts дар next.config.ts фаъол мешаванд. Даъвати онҳо app/forbidden.tsx / app/unauthorized.tsx-ро нишон медиҳад ва рамзи ҳолати HTTP-и мувофиқро муқаррар мекунад.",
+    "triggerForbidden": "Даъвати forbidden() → 403",
+    "triggerUnauthorized": "Даъвати unauthorized() → 401"
+  },
+  "DynamicDemo": {
+    "title": "Сегментҳои Динамикӣ",
+    "description": "app/demos/dynamic/[slug]/page.tsx ҳар чизеро, ки шумо дар URL мегузоред, мехонад. Яке аз пайвандҳоро санҷед ё URL-ро дастӣ таҳрир кунед:",
+    "linkHello": "/demos/dynamic/hello",
+    "linkNextJs16": "/demos/dynamic/next-js-16",
+    "slugResult": "params.slug = \"{slug}\""
+  },
+  "ErrorDemo": {
+    "pageTitle": "error.js",
+    "description": "Барои партофтани хатогӣ ҳангоми рендер ва фаъол кардани наздиктарин марзи error.js тугмаро пахш кунед.",
+    "throwButton": "Хатогӣ партофтан",
+    "boomMessage": "Бум! Ин хатогӣ қасдан партофта шуд.",
+    "boundaryTitle": "Хатогӣ рӯй дод",
+    "tryAgainButton": "Аз нав кӯшиш кунед (unstable_retry)"
+  },
+  "FeedDemo": {
+    "description": "Ба акс пахш кунед: гузариши тарафи муштарӣ онро ҳамчун равзанаи модалӣ мекушояд ва URL-ро пинҳон мекунад. Сипас саҳифаро пурра аз нав бор кунед (ё URL-ро дар варақаи нав кушоед) — ва ба ҷои он саҳифаи мустақили пурра мебароед, бе вафа.",
+    "modalCaption": "Акси №{id} — тавассути роҳи вафакунандаи @modal/(.)photo/[id]/page.tsx рендер шудааст. URL /demos/feed/photo/{id}-ро нишон медиҳад, аммо ҷараён ҳанӯз паси ин равзанаи модалӣ намоён аст.",
+    "photoPageTitle": "Акси №{id} (саҳифаи пурра)",
+    "photoPageDescription": "Шумо мустақиман ба ин ҷо омадед (гузариши сахт ё аз нав боркунӣ), бинобар ин вафа гузашта шуд ва ба ҷои он ин саҳифаи мустақил рендер шуд.",
+    "backToFeed": "← Бозгашт ба ҷараён",
+    "closeModal": "Пӯшидани равзана"
+  },
+  "InstrumentationDemo": {
+    "title": "instrumentation.ts ва instrumentation-client.ts",
+    "description": "Инҳо файлҳои сатҳи реша ҳастанд, на роҳҳо — дар ин ҷо чизе барои пахш кардан нест. Ба ҷои он:",
+    "bulletServer": "Ба терминале, ки <code>npm run dev</code>-ро иҷро мекунад, нигаред — <code>instrumentation.ts</code> як бор ҳангоми оғози сервер сабт кард.",
+    "bulletClient": "Консоли DevTools-и браузерро кушоед — <code>instrumentation-client.ts</code> ҳангоми боркунии саҳифа сабт кард ва бо ҳар гузариш тавассути onRouterTransitionStart боз сабт мекунад."
+  },
+  "LayoutDemo": {
+    "title": "layout.js (боқӣ мемонад)",
+    "mountedNote": "Ин layout як бор, дар {time}, насб шуд ва ҳангоми гузариш байни саҳифаҳои фарзанди зерин насбшуда боқӣ мемонад.",
+    "pickNote": "Барои гузариш байни саҳифаҳои фарзанд a, b ё c-ро дар боло интихоб кунед.",
+    "idResult": "Ҳоло нишон дода мешавад: {id}. Ба ҳисобкунак дар боло пахш кунед, сипас a/b/c-ро иваз кунед — ҳисоб боқӣ мемонад, зеро layout.js ҳеҷ гоҳ аз нав насб намешавад.",
+    "compareWith": "Бо <link>template-demo</link> муқоиса кунед."
+  },
+  "LoadingDemo": {
+    "title": "loading.js",
+    "streamingFallback": "Ивазкунандаи ҷараёнӣ, ки то боздошти саҳифа фавран нишон дода мешавад…",
+    "awaitNote": "Ин саҳифа пеш аз рендер як дархости бардурӯғи 1,5 сониягиро интизор мешавад. Пайванди оддии зеринро (аз нав боркунии пурра) истифода баред, то ивазкунандаи loading.js-ро боз бинед.",
+    "loadedAt": "Дар {time} бор шуд"
+  },
+  "NotFoundDemo": {
+    "title": "not-found.js",
+    "description": "Ин Компоненти Сервер ҳангоми фармон notFound()-ро даъват мекунад ва ба ҷои саҳифа not-found.js-ро барои ин сегмент нишон медиҳад.",
+    "triggerButton": "Даъвати notFound()",
+    "renderedTitle": "not-found.js рендер шуд",
+    "renderedDescription": "notFound() даъват шуд — Next.js ба ҷои саҳифа ин файлро рендер кард ва барои посухҳои ғайристримингӣ рамзи 404-ро бармегардонад.",
+    "goBack": "← Бозгашт"
+  },
+  "ParallelDemo": {
+    "title": "Роҳҳои Мувозӣ",
+    "description": "@team ва @analytics ҳамзамон, дар якҷоягӣ бо children, аз ҳамин як layout рендер мешаванд. Аввал пайванди танзимоти @team-ро бо гузариши мулоим (soft) санҷед, сипас URL-и /settings-ро пурра аз нав бор кунед, то дидани кори default.js.",
+    "childrenSlotNote": "Ин слоти children дар /demos/parallel аст.",
+    "childrenDefaultFallback": "Ивазкунандаи children default.js — саҳифаи реша роҳи /settings надорад, бинобар ин ин ҳангоми гузариши сахт ба /demos/parallel/settings рендер мешавад.",
+    "teamSlotLabel": "Слоти @team",
+    "analyticsSlotLabel": "Слоти @analytics",
+    "teamOverview": "Шарҳи дастҷамъӣ (намуди пешфарз)",
+    "goToSettings": "Ба танзимоти дастҷамъӣ гузаред →",
+    "teamSettings": "Саҳифаи танзимоти дастҷамъӣ — дар дохили @team, бо URL /demos/parallel/settings.",
+    "teamDefaultFallback": "Ивазкунандаи @team default.js",
+    "analyticsOverview": "Шарҳи таҳлилот (намуди пешфарз)",
+    "analyticsDefaultFallback": "Ивазкунандаи @analytics default.js — ҳангоми аз нав боркунии пурра нишон дода мешавад, зеро /settings дар ин слот вуҷуд надорад."
+  },
+  "ProxyDemo": {
+    "title": "proxy.ts",
+    "description": "proxy.ts, дар решаи лоиҳа, пеш аз рендери саҳифа /demos/proxy/old-ро ба /demos/proxy/new равона мекунад. Ин файл пеш аз Next.js 16 \"middleware\" ном дошт — рафтори якхела, номи нав.",
+    "visitOld": "Ба /demos/proxy/old гузаред →",
+    "neverSeeThis": "Шумо набояд ҳеҷ гоҳ инро бинед — proxy.ts ин роҳро дар сервер равона мекунад.",
+    "redirectedTitle": "Тавассути proxy.ts равона карда шуд ✓",
+    "redirectedDescription": "proxy.ts /demos/proxy/old-ро дарёфт ва дар сервер ба ин ҷо равона кард. Дар терминал сатри сабти \"[proxy.ts] intercepted request\"-ро санҷед."
+  },
+  "RouteGroupsDemo": {
+    "title": "Гурӯҳҳои Роҳ",
+    "description": "(marketing) ва (shop) ҳамчун папка дар диск мавҷуданд, аммо дар URL намоён нестанд.",
+    "onDiskNote": "Дар диск: app/demos/route-groups/(marketing)/about/page.tsx ва app/demos/route-groups/(shop)/cart/page.tsx",
+    "aboutPageTitle": "/demos/route-groups/about",
+    "aboutPageDescription": "Аз app/demos/route-groups/(marketing)/about/page.tsx хизмат мерасонад — сегменти (marketing) дар URL номаён аст.",
+    "cartPageTitle": "/demos/route-groups/cart",
+    "cartPageDescription": "Аз app/demos/route-groups/(shop)/cart/page.tsx хизмат мерасонад — сегменти (shop) дар URL номаён аст."
+  },
+  "RouteHandlerDemo": {
+    "title": "route.js",
+    "description": "app/demos/route-handler-demo/api/route.ts коркардҳои GET ва POST-ро бо истифодаи Web Request/Response API содир мекунад.",
+    "getButton": "GET",
+    "postButton": "POST",
+    "apiMessage": "Салом аз route.js"
+  },
+  "SegmentConfigDemo": {
+    "title": "Танзими Сегменти Роҳ",
+    "description": "Ин саҳифа <code>revalidate = 10</code>-ро содир мекунад. Дар реҷаи таҳиягарӣ ҳар дархост тоза аст, бинобар ин ин мӯҳри вақт ҳамеша тағйир меёбад. <code>npm run build</code>-ро иҷро кунед, сипас <code>npm run start</code>-ро ва борҳо аз нав бор кунед, то бубинед, ки он тақрибан 10 сония бетағйир мемонад.",
+    "generatedAt": "дар {time} тавлид шуд"
+  },
+  "TemplateDemo": {
+    "title": "template.js (аз нав насб мешавад)",
+    "note": "Ин template ҳар гоҳ, ки id дар поён тағйир меёбад, аз нав насб мешавад — вақти насб ва ҳисоби пахшро тамошо кунед, ки аз нав насб мешаванд.",
+    "pickNote": "Барои гузариш байни саҳифаҳои фарзанд a, b ё c-ро дар боло интихоб кунед.",
+    "idResult": "Ҳоло нишон дода мешавад: {id}.",
+    "compareWith": "Бо <link>layout-demo</link> муқоиса кунед."
+  }
+}
