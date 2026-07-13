@@ -1,0 +1,42 @@
+{
+  "meta": {
+    "title": "Todo — Next.js Data Fetching Reference",
+    "description": "A Todo app demonstrating Server Components, Route Handlers, Server Actions, caching, and streaming in the Next.js App Router."
+  },
+  "header": {
+    "title": "Todos",
+    "subtitle": "A Next.js App Router reference for data fetching & caching"
+  },
+  "addItem": {
+    "trigger": "ADD ITEM",
+    "modalTitle": "Add Todo",
+    "namePlaceholder": "Name",
+    "descriptionPlaceholder": "Description",
+    "cancel": "Cancel",
+    "submit": "Add",
+    "submitting": "Adding..."
+  },
+  "empty": {
+    "message": "No todos yet — add one above to get started."
+  },
+  "item": {
+    "edit": "Edit",
+    "delete": "Delete",
+    "markComplete": "Mark as complete",
+    "markActive": "Mark as active",
+    "editModalTitle": "Edit Todo",
+    "imagesLabel": "Images",
+    "cancel": "Cancel",
+    "save": "Save",
+    "saving": "Saving...",
+    "deleteModalTitle": "Delete Todo",
+    "deleteConfirm": "Are you sure you want to delete this todo? This action cannot be undone.",
+    "deleteSubmit": "Delete",
+    "deleting": "Deleting..."
+  },
+  "error": {
+    "title": "Something went wrong",
+    "generic": "An unexpected error occurred while loading todos.",
+    "retry": "Try again"
+  }
+}

@@ -1,12 +1,21 @@
 "use client";
 
 import { useState, useTransition, useEffect, useRef } from "react";
-import { Check, Pencil, Trash2, X } from "lucide-react";
+import Image from "next/image";
+import { Check, ImageOff, Pencil, Trash2, X } from "lucide-react";
 import type { Todo } from "@/lib/api";
+import { imageUrl } from "@/lib/todo-types";
+import type { Dictionary } from "@/app/[lang]/dictionaries";
 import { deleteTodoAction, editTodoAction, toggleTodoAction } from "@/lib/actions";
 import TodoImages from "./TodoImages";
 
-export default function TodoItem({ todo }: { todo: Todo }) {
+export default function TodoItem({
+  todo,
+  dict,
+}: {
+  todo: Todo;
+  dict: Dictionary["item"];
+}) {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [draftName, setDraftName] = useState(todo.name);
@@ -43,7 +52,7 @@ export default function TodoItem({ todo }: { todo: Todo }) {
       setIsEditModalOpen(false);
     });
   }
-  
+
   function confirmDelete(formData: FormData) {
     startTransition(async () => {
       await deleteTodoAction(formData);
@@ -51,74 +60,90 @@ export default function TodoItem({ todo }: { todo: Todo }) {
     });
   }
 
+  const coverImage = todo.images[0];
+
   return (
-    <li className="group rounded-xl border border-zinc-200 bg-white p-3 transition-colors hover:border-zinc-300 dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-zinc-700">
-      <div className="flex items-start gap-3">
-        <form action={toggleTodoAction} className="pt-0.5">
+    <li className="group flex flex-col">
+      <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl bg-zinc-900">
+        {coverImage ? (
+          <Image
+            src={imageUrl(coverImage.imageName)}
+            alt=""
+            fill
+            sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
+            className="object-cover"
+          />
+        ) : (
+          <div className="flex h-full w-full items-center justify-center text-zinc-700">
+            <ImageOff className="h-8 w-8" />
+          </div>
+        )}
+
+        <form action={toggleTodoAction} className="absolute left-2 top-2">
           <input type="hidden" name="id" value={todo.id} />
           <button
             type="submit"
-            aria-label={todo.isCompleted ? "Mark as active" : "Mark as complete"}
-            className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 transition-colors ${
+            aria-label={todo.isCompleted ? dict.markActive : dict.markComplete}
+            className={`flex h-6 w-6 items-center justify-center rounded-full border-2 backdrop-blur-sm transition-colors ${
               todo.isCompleted
-                ? "border-indigo-600 bg-indigo-600 text-white dark:border-indigo-500 dark:bg-indigo-500"
-                : "border-zinc-300 hover:border-indigo-400 dark:border-zinc-600 dark:hover:border-indigo-400"
+                ? "border-indigo-500 bg-indigo-500 text-white"
+                : "border-white/70 bg-black/30 hover:border-indigo-400"
             }`}
           >
-            {todo.isCompleted && <Check className="h-3 w-3" strokeWidth={3} />}
+            {todo.isCompleted && <Check className="h-3.5 w-3.5" strokeWidth={3} />}
           </button>
         </form>
-
-        <div className="min-w-0 flex-1">
-          <p
-            className={`text-sm font-medium ${
-              todo.isCompleted
-                ? "text-zinc-400 line-through dark:text-zinc-600"
-                : "text-zinc-900 dark:text-zinc-50"
-            }`}
-          >
-            {todo.name}
-          </p>
-          <p className="mt-0.5 line-clamp-2 text-sm text-zinc-500 dark:text-zinc-400">
-            {todo.description}
-          </p>
-        </div>
-
-        <div className="flex shrink-0 items-center gap-0.5 opacity-60 transition-opacity group-hover:opacity-100 focus-within:opacity-100">
-          <IconButton
-            type="button"
-            onClick={startEditing}
-            label="Edit todo"
-            className="text-zinc-400 hover:bg-zinc-100 hover:text-zinc-700 dark:text-zinc-500 dark:hover:bg-zinc-800 dark:hover:text-zinc-200"
-          >
-            <Pencil className="h-3.5 w-3.5" />
-          </IconButton>
-
-          <IconButton
-            type="button"
-            onClick={() => setIsDeleteModalOpen(true)}
-            label="Delete todo"
-            className="text-zinc-400 hover:bg-red-50 hover:text-red-600 dark:text-zinc-500 dark:hover:bg-red-950/50 dark:hover:text-red-400"
-          >
-            <Trash2 className="h-3.5 w-3.5" />
-          </IconButton>
-        </div>
       </div>
 
-      <TodoImages todoId={todo.id} images={todo.images} />
+      <div className="flex flex-col items-center gap-0.5 pt-3 text-center">
+        <p
+          className={`text-sm ${
+            todo.isCompleted ? "text-zinc-600 line-through" : "text-slate-400"
+          }`}
+        >
+          {todo.name}
+        </p>
+        <p
+          className={`line-clamp-1 text-base font-bold ${
+            todo.isCompleted ? "text-zinc-600 line-through" : "text-zinc-50"
+          }`}
+        >
+          {todo.description}
+        </p>
+      </div>
+
+      <div className="mt-2 grid w-full grid-cols-2 gap-2 opacity-0 transition-opacity group-hover:opacity-100 focus-within:opacity-100">
+        <button
+          type="button"
+          onClick={startEditing}
+          className="flex items-center justify-center gap-1.5 rounded-lg bg-amber-400/15 px-3 py-2 text-xs font-semibold text-amber-300 transition-colors hover:bg-amber-400/25"
+        >
+          <Pencil className="h-3.5 w-3.5" />
+          {dict.edit}
+        </button>
+
+        <button
+          type="button"
+          onClick={() => setIsDeleteModalOpen(true)}
+          className="flex items-center justify-center gap-1.5 rounded-lg bg-red-500/15 px-3 py-2 text-xs font-semibold text-red-400 transition-colors hover:bg-red-500/25"
+        >
+          <Trash2 className="h-3.5 w-3.5" />
+          {dict.delete}
+        </button>
+      </div>
 
       {/* Edit Modal */}
       <dialog
         ref={editDialogRef}
         onCancel={() => setIsEditModalOpen(false)}
-        className="backdrop:bg-zinc-950/50 backdrop:backdrop-blur-sm bg-white dark:bg-zinc-900 rounded-xl shadow-lg border border-zinc-200 dark:border-zinc-800 p-0 m-auto w-full max-w-md open:animate-in open:fade-in open:zoom-in-95"
+        className="backdrop:bg-zinc-950/50 backdrop:backdrop-blur-sm bg-zinc-900 rounded-xl shadow-lg border border-zinc-800 p-0 m-auto w-full max-w-md open:animate-in open:fade-in open:zoom-in-95"
       >
-        <div className="flex items-center justify-between border-b border-zinc-100 dark:border-zinc-800 px-4 py-3">
-          <h3 className="font-semibold text-zinc-900 dark:text-zinc-50">Edit Todo</h3>
+        <div className="flex items-center justify-between border-b border-zinc-800 px-4 py-3">
+          <h3 className="font-semibold text-zinc-50">{dict.editModalTitle}</h3>
           <button
             type="button"
             onClick={() => setIsEditModalOpen(false)}
-            className="text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200"
+            className="text-zinc-400 hover:text-zinc-200"
           >
             <X className="h-5 w-5" />
           </button>
@@ -133,8 +158,7 @@ export default function TodoItem({ todo }: { todo: Todo }) {
               onChange={(e) => setDraftName(e.target.value)}
               required
               maxLength={100}
-              placeholder="Name"
-              className="rounded-lg border border-zinc-200 bg-zinc-50 px-3.5 py-2.5 text-sm text-zinc-900 placeholder:text-zinc-400 outline-none transition-colors focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-500/20 dark:border-zinc-700 dark:bg-zinc-950 dark:text-zinc-50 dark:placeholder:text-zinc-500 dark:focus:border-indigo-400 dark:focus:bg-zinc-950 dark:focus:ring-indigo-400/20"
+              className="rounded-lg border border-zinc-700 bg-zinc-950 px-3.5 py-2.5 text-sm text-zinc-50 placeholder:text-zinc-500 outline-none transition-colors focus:border-indigo-400 focus:bg-zinc-950 focus:ring-2 focus:ring-indigo-400/20"
             />
             <textarea
               name="description"
@@ -143,24 +167,29 @@ export default function TodoItem({ todo }: { todo: Todo }) {
               required
               maxLength={1000}
               rows={3}
-              placeholder="Description"
-              className="resize-none rounded-lg border border-zinc-200 bg-zinc-50 px-3.5 py-2.5 text-sm text-zinc-900 placeholder:text-zinc-400 outline-none transition-colors focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-500/20 dark:border-zinc-700 dark:bg-zinc-950 dark:text-zinc-50 dark:placeholder:text-zinc-500 dark:focus:border-indigo-400 dark:focus:bg-zinc-950 dark:focus:ring-indigo-400/20"
+              className="resize-none rounded-lg border border-zinc-700 bg-zinc-950 px-3.5 py-2.5 text-sm text-zinc-50 placeholder:text-zinc-500 outline-none transition-colors focus:border-indigo-400 focus:bg-zinc-950 focus:ring-2 focus:ring-indigo-400/20"
             />
+
+            <div>
+              <p className="mb-2 text-xs font-medium text-zinc-400">{dict.imagesLabel}</p>
+              <TodoImages todoId={todo.id} images={todo.images} />
+            </div>
+
             <div className="flex justify-end gap-2 mt-2">
               <button
                 type="button"
                 onClick={() => setIsEditModalOpen(false)}
                 disabled={isPending}
-                className="rounded-lg px-4 py-2 text-sm font-medium text-zinc-600 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-800"
+                className="rounded-lg px-4 py-2 text-sm font-medium text-zinc-400 hover:bg-zinc-800"
               >
-                Cancel
+                {dict.cancel}
               </button>
               <button
                 type="submit"
                 disabled={isPending}
-                className="flex items-center gap-1.5 rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm transition-colors hover:bg-indigo-500 disabled:opacity-50 dark:bg-indigo-500 dark:hover:bg-indigo-400"
+                className="flex items-center gap-1.5 rounded-lg bg-indigo-500 px-4 py-2 text-sm font-medium text-white shadow-sm transition-colors hover:bg-indigo-400 disabled:opacity-50"
               >
-                {isPending ? "Saving..." : "Save"}
+                {isPending ? dict.saving : dict.save}
               </button>
             </div>
           </form>
@@ -171,59 +200,40 @@ export default function TodoItem({ todo }: { todo: Todo }) {
       <dialog
         ref={deleteDialogRef}
         onCancel={() => setIsDeleteModalOpen(false)}
-        className="backdrop:bg-zinc-950/50 backdrop:backdrop-blur-sm bg-white dark:bg-zinc-900 rounded-xl shadow-lg border border-zinc-200 dark:border-zinc-800 p-0 m-auto w-full max-w-sm open:animate-in open:fade-in open:zoom-in-95"
+        className="backdrop:bg-zinc-950/50 backdrop:backdrop-blur-sm bg-zinc-900 rounded-xl shadow-lg border border-zinc-800 p-0 m-auto w-full max-w-sm open:animate-in open:fade-in open:zoom-in-95"
       >
-        <div className="flex items-center justify-between border-b border-zinc-100 dark:border-zinc-800 px-4 py-3">
-          <h3 className="font-semibold text-zinc-900 dark:text-zinc-50">Delete Todo</h3>
+        <div className="flex items-center justify-between border-b border-zinc-800 px-4 py-3">
+          <h3 className="font-semibold text-zinc-50">{dict.deleteModalTitle}</h3>
           <button
             type="button"
             onClick={() => setIsDeleteModalOpen(false)}
-            className="text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200"
+            className="text-zinc-400 hover:text-zinc-200"
           >
             <X className="h-5 w-5" />
           </button>
         </div>
         <div className="p-4">
-          <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-6">
-            Are you sure you want to delete this todo? This action cannot be undone.
-          </p>
+          <p className="text-sm text-zinc-400 mb-6">{dict.deleteConfirm}</p>
           <form action={confirmDelete} className="flex justify-end gap-2">
             <input type="hidden" name="id" value={todo.id} />
             <button
               type="button"
               onClick={() => setIsDeleteModalOpen(false)}
               disabled={isPending}
-              className="rounded-lg px-4 py-2 text-sm font-medium text-zinc-600 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-800"
+              className="rounded-lg px-4 py-2 text-sm font-medium text-zinc-400 hover:bg-zinc-800"
             >
-              Cancel
+              {dict.cancel}
             </button>
             <button
               type="submit"
               disabled={isPending}
-              className="flex items-center gap-1.5 rounded-lg bg-red-600 px-4 py-2 text-sm font-medium text-white shadow-sm transition-colors hover:bg-red-500 disabled:opacity-50 dark:bg-red-600 dark:hover:bg-red-500"
+              className="flex items-center gap-1.5 rounded-lg bg-red-600 px-4 py-2 text-sm font-medium text-white shadow-sm transition-colors hover:bg-red-500 disabled:opacity-50"
             >
-              {isPending ? "Deleting..." : "Delete"}
+              {isPending ? dict.deleting : dict.deleteSubmit}
             </button>
           </form>
         </div>
       </dialog>
     </li>
-  );
-}
-
-function IconButton({
-  children,
-  label,
-  className = "",
-  ...props
-}: React.ButtonHTMLAttributes<HTMLButtonElement> & { label: string }) {
-  return (
-    <button
-      aria-label={label}
-      className={`flex h-7 w-7 items-center justify-center rounded-md transition-colors disabled:opacity-50 ${className}`}
-      {...props}
-    >
-      {children}
-    </button>
   );
 }

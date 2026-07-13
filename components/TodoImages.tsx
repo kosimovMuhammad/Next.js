@@ -53,7 +53,7 @@ export default function TodoImages({
       {images.map((image) => (
         <div
           key={image.id}
-          className="group/img relative h-14 w-14 shrink-0 overflow-hidden rounded-lg border border-zinc-200 dark:border-zinc-800"
+          className="group/img relative h-14 w-14 shrink-0 overflow-hidden rounded-lg border border-zinc-800"
         >
           <Image
             src={imageUrl(image.imageName)}
@@ -75,7 +75,7 @@ export default function TodoImages({
       ))}
 
       <label
-        className={`flex h-14 w-14 shrink-0 cursor-pointer items-center justify-center rounded-lg border border-dashed border-zinc-300 text-zinc-400 transition-colors hover:border-indigo-400 hover:text-indigo-500 dark:border-zinc-700 dark:text-zinc-600 dark:hover:border-indigo-500 dark:hover:text-indigo-400 ${
+        className={`flex h-14 w-14 shrink-0 cursor-pointer items-center justify-center rounded-lg border border-dashed border-zinc-700 text-zinc-600 transition-colors hover:border-indigo-500 hover:text-indigo-400 ${
           isPending ? "pointer-events-none opacity-50" : ""
         }`}
       >
